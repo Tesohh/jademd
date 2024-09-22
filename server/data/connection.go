@@ -18,6 +18,7 @@ func GetConnection() (*gorm.DB, error) {
 	}
 
 	err = db.AutoMigrate(&User{})
+	err = db.AutoMigrate(&Publisher{})
 	if err != nil {
 		return nil, err
 	}

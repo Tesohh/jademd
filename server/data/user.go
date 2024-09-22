@@ -1,9 +1,12 @@
 package data
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
-	ID       string
 	Username string
+
+	IsPublisher bool
 }
