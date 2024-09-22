@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "89c1fab40b4e8b9c",
+        "id": "a3c3c8f2d0e09316",
         "type": "tabs",
         "children": [
           {
-            "id": "44f76022bb26fb67",
+            "id": "083356bf215b9643",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 Welcome to jade/01 Introduction/01 Structure.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01 Welcome to jade/01 Introduction/01 Structure.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "01 Welcome to jade/01 Introduction/01 Structure.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "01 Welcome to jade/01 Introduction/01 Structure.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -146,10 +138,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "44f76022bb26fb67",
+  "active": "083356bf215b9643",
   "lastOpenFiles": [
-    "01 Welcome to jade/01 Introduction/02 Numbering.md",
     "01 Welcome to jade/01 Introduction/01 Structure.md",
+    "01 Welcome to jade/01 Introduction/02 Numbering.md",
     "01 Welcome to jade/metadata.md",
     "metadata.md",
     "01 Welcome to jade/01 Introduction/01 Your first page.md",
