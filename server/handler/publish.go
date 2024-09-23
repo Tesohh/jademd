@@ -49,13 +49,14 @@ func Publish(c *fiber.Ctx) error {
 		return &ErrPublishPathNotSet
 	}
 
-	// TODO: improe error handling, by canceling the whole folder being created to avoid half baked vaults being published
 	dateStr := time.Now().Format(time.RFC3339)
 	dateStr = strings.ReplaceAll(dateStr, "/", "-")
 	dateStr = strings.ReplaceAll(dateStr, ":", "-")
 
+	vaultPath := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), dateStr)
+	var unzipErr error
 	for _, zf := range folder.File {
-		path := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), dateStr, zf.Name)
+		path := filepath.Join(vaultPath, zf.Name)
 
 		if strings.Contains(path, "__MACOSX") || strings.Contains(path, ".DS_Store") {
 			continue
@@ -65,27 +66,37 @@ func Publish(c *fiber.Ctx) error {
 
 		// is directory
 		if zf.FileInfo().IsDir() {
-			err = os.MkdirAll(path, os.ModePerm)
-			if err != nil {
-				return err
+			unzipErr = os.MkdirAll(path, os.ModePerm)
+			if unzipErr != nil {
+				break
 			}
 			continue
 		}
 
-		dstFile, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, zf.Mode())
+		dstFile, unzipErr := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, zf.Mode())
+		if unzipErr != nil {
+			break
+		}
+
+		unzippedArchive, unzipErr := zf.Open()
+		if unzipErr != nil {
+			break
+		}
+
+		_, unzipErr = io.Copy(dstFile, unzippedArchive)
+		if unzipErr != nil {
+			break
+		}
+	}
+
+	if unzipErr != nil {
+		fmt.Println("Aborting operation due to %s", err.Error())
+		err := os.RemoveAll(vaultPath)
 		if err != nil {
 			return err
 		}
 
-		unzippedArchive, err := zf.Open()
-		if err != nil {
-			return err
-		}
-
-		_, err = io.Copy(dstFile, unzippedArchive)
-		if err != nil {
-			return err
-		}
+		return fmt.Errorf("%w (operation aborted)", unzipErr)
 	}
 
 	return nil
