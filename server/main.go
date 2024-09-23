@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	_ "github.com/joho/godotenv/autoload"
 )
 
@@ -22,6 +23,7 @@ func main() {
 		c.Locals("db", db)
 		return c.Next()
 	})
+	app.Use(logger.New())
 
 	app.Post("/publish", handler.Publish)
 

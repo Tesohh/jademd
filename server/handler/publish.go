@@ -3,6 +3,7 @@ package handler
 import (
 	"archive/zip"
 	"fmt"
+	"io"
 	"jademd/data"
 	"os"
 	"path/filepath"
@@ -52,39 +53,36 @@ func Publish(c *fiber.Ctx) error {
 	dateStr := time.Now().Format(time.RFC3339)
 	dateStr = strings.ReplaceAll(dateStr, "/", "-")
 	dateStr = strings.ReplaceAll(dateStr, ":", "-")
+
 	for _, zf := range folder.File {
 		path := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), dateStr, zf.Name)
+
+		if strings.Contains(path, "__MACOSX") || strings.Contains(path, ".DS_Store") {
+			continue
+		}
+
 		fmt.Println(path)
 
 		// is directory
-		// if zf.FileInfo().IsDir() {
-		// 	os.MkdirAll(path, os.ModePerm)
-		// 	fmt.Println("IsDir making directory", path)
-		// 	continue
-		// }
+		if zf.FileInfo().IsDir() {
+			err = os.MkdirAll(path, os.ModePerm)
+			if err != nil {
+				return err
+			}
+			continue
+		}
 
-		//at this point we are only dealing with files
-		err = os.MkdirAll(path, os.ModePerm)
-		fmt.Println("making directory", path)
+		dstFile, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, zf.Mode())
 		if err != nil {
 			return err
 		}
 
-		unzippedFile, err := zf.Open()
+		unzippedArchive, err := zf.Open()
 		if err != nil {
 			return err
 		}
-		defer unzippedFile.Close()
 
-		b := make([]byte, 0)
-		_, err = unzippedFile.Read(b)
-		if err != nil {
-			return err
-		}
-		defer unzippedFile.Close()
-
-		fmt.Println("writing FILE", path)
-		err = os.WriteFile(path, b, os.ModePerm)
+		_, err = io.Copy(dstFile, unzippedArchive)
 		if err != nil {
 			return err
 		}
