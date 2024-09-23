@@ -16,3 +16,7 @@
 
 - [ ] Connection string from server
 - [ ] Publish vault
+
+# Security considerations
+
+- [ ] if a malicious person gets a hold of a publisher key and sends a vault with a malicious plugin...

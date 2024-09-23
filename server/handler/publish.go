@@ -13,6 +13,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// "http://localhost:8080 TUBARAO"
+
 func Publish(c *fiber.Ctx) error {
 	// Try to retrieve the publisher from the key that we can get from Headers
 	key := c.Get("PublisherKey", "")
@@ -54,6 +56,7 @@ func Publish(c *fiber.Ctx) error {
 	dateStr = strings.ReplaceAll(dateStr, ":", "-")
 
 	vaultPath := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), dateStr)
+	fmt.Printf("received %s files\n", len(folder.File))
 	var unzipErr error
 	for _, zf := range folder.File {
 		path := filepath.Join(vaultPath, zf.Name)

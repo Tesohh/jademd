@@ -1,0 +1,10 @@
+{
+	"id": "jade-helper",
+	"name": "Jade Helper",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Provides tools for Jade, like Publishing from within Obsidian.",
+	"author": "Tesohh",
+	"authorUrl": "https://github.com/Tesohh",
+	"isDesktopOnly": false
+}

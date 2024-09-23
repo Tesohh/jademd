@@ -23,6 +23,19 @@ func main() {
 		c.Locals("db", db)
 		return c.Next()
 	})
+
+	app.Use(func(c *fiber.Ctx) error {
+		c.Set("Access-Control-Allow-Origin", "*")
+		c.Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+		c.Set("Access-Control-Allow-Headers", "PublisherKey")
+
+		if c.Method() == "OPTIONS" {
+			return c.SendStatus(fiber.StatusNoContent) // Respond with 204 No Content to preflight
+		}
+
+		return c.Next()
+	})
+
 	app.Use(logger.New())
 
 	app.Post("/publish", handler.Publish)
