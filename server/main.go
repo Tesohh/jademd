@@ -2,6 +2,7 @@ package main
 
 import (
 	"jademd/data"
+	"jademd/handler"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -21,6 +22,8 @@ func main() {
 		c.Locals("db", db)
 		return c.Next()
 	})
+
+	app.Post("/publish", handler.Publish)
 
 	app.Listen(":8080")
 }
