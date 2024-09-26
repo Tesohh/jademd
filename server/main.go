@@ -39,6 +39,7 @@ func main() {
 	app.Use(logger.New())
 
 	app.Post("/publish", handler.Publish)
+	app.Get("/testtempl", handler.TestTempl)
 
 	app.Listen(":8080")
 }

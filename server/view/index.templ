@@ -1,0 +1,11 @@
+package view
+
+templ Index(title string, component templ.Component) {
+	<!DOCTYPE html>
+	<html>
+		@Head(title)
+		<body>
+			@component
+		</body>
+	</html>
+}

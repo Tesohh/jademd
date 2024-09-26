@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "a3c3c8f2d0e09316",
+        "id": "0e4fc2fbc3bc2855",
         "type": "tabs",
         "children": [
           {
-            "id": "083356bf215b9643",
+            "id": "6c4816157a604f65",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -138,7 +138,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "083356bf215b9643",
+  "active": "6c4816157a604f65",
   "lastOpenFiles": [
     "01 Welcome to jade/01 Introduction/01 Structure.md",
     "01 Welcome to jade/01 Introduction/02 Numbering.md",

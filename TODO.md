@@ -2,6 +2,7 @@
 
 - [x] Store vaults
 - [ ] Rendering
+  - [ ] Header template
   - [ ] Render homepage
   - [ ] show courses
   - [ ] click on course and go right into the page
