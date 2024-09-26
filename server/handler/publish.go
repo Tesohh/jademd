@@ -11,9 +11,18 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/log"
 )
 
 // "http://localhost:8080 TUBARAO"
+
+func abortVaultSaving(err error, vaultPath string) {
+	fmt.Println("Aborting operation due to %s", err.Error())
+	removeErr := os.RemoveAll(vaultPath)
+	if removeErr != nil {
+		log.Warn(removeErr)
+	}
+}
 
 func Publish(c *fiber.Ctx) error {
 	// Try to retrieve the publisher from the key that we can get from Headers
@@ -57,7 +66,12 @@ func Publish(c *fiber.Ctx) error {
 
 	vaultPath := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), dateStr)
 	fmt.Printf("received %s files\n", len(folder.File))
-	var unzipErr error
+
+	err = os.MkdirAll(vaultPath, os.ModePerm)
+	if err != nil {
+		return err
+	}
+
 	for _, zf := range folder.File {
 		path := filepath.Join(vaultPath, zf.Name)
 
@@ -69,37 +83,31 @@ func Publish(c *fiber.Ctx) error {
 
 		// is directory
 		if zf.FileInfo().IsDir() {
-			unzipErr = os.MkdirAll(path, os.ModePerm)
-			if unzipErr != nil {
-				break
+			err = os.MkdirAll(path, os.ModePerm)
+			if err != nil {
+				abortVaultSaving(err, vaultPath)
+				return fmt.Errorf("%w (operation aborted)", err)
 			}
 			continue
 		}
 
-		dstFile, unzipErr := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, zf.Mode())
-		if unzipErr != nil {
-			break
-		}
-
-		unzippedArchive, unzipErr := zf.Open()
-		if unzipErr != nil {
-			break
-		}
-
-		_, unzipErr = io.Copy(dstFile, unzippedArchive)
-		if unzipErr != nil {
-			break
-		}
-	}
-
-	if unzipErr != nil {
-		fmt.Println("Aborting operation due to %s", err.Error())
-		err := os.RemoveAll(vaultPath)
+		dstFile, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, zf.Mode())
 		if err != nil {
-			return err
+			abortVaultSaving(err, vaultPath)
+			return fmt.Errorf("%w (operation aborted)", err)
 		}
 
-		return fmt.Errorf("%w (operation aborted)", unzipErr)
+		unzippedArchive, err := zf.Open()
+		if err != nil {
+			abortVaultSaving(err, vaultPath)
+			return fmt.Errorf("%w (operation aborted)", err)
+		}
+
+		_, err = io.Copy(dstFile, unzippedArchive)
+		if err != nil {
+			abortVaultSaving(err, vaultPath)
+			return fmt.Errorf("%w (operation aborted)", err)
+		}
 	}
 
 	return nil

@@ -1,6 +1,6 @@
 # Server
 
-- [ ] Store vaults with 3 version history, on a docker container.
+- [x] Store vaults
 - [ ] Rendering
   - [ ] Render homepage
   - [ ] show courses
@@ -14,8 +14,8 @@
 
 # Obsidian plugin / template
 
-- [ ] Connection string from server
-- [ ] Publish vault
+- [x] Connection string from server
+- [x] Publish vault
 
 # Security considerations
 

@@ -22,7 +22,6 @@ export default class JadeHelper extends Plugin {
 			id: "publish-vault",
 			name: "Publish vault to jade",
 			callback: async () => {
-				new Notice("CISSY");
 				try {
 					const zip = new JSZip();
 					const files = this.app.vault.getFiles();
