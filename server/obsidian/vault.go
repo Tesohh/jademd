@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"os"
 	"path/filepath"
+	"sort"
 )
 
 type Vault struct {
@@ -17,6 +18,20 @@ type VaultMetadata struct {
 	Name         string
 	Authors      string
 	ContactEmail string
+}
+
+func VaultFromLatest(expandCourses bool, expandChapters bool, expandPages bool) (Vault, error) {
+	entries, err := os.ReadDir(os.Getenv("JADEMD_PUBLISH_PATH"))
+	if err != nil {
+		return Vault{}, err
+	}
+
+	sort.Slice(entries, func(i, j int) bool {
+		return entries[i].Name() < entries[j].Name()
+	})
+
+	path := filepath.Join(os.Getenv("JADEMD_PUBLISH_PATH"), entries[0].Name())
+	return VaultFromDir(path, expandCourses, expandChapters, expandPages)
 }
 
 func VaultFromDir(path string, expandCourses bool, expandChapters bool, expandPages bool) (Vault, error) {
