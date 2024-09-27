@@ -11,8 +11,12 @@
             "id": "6c4816157a604f65",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "01 Welcome to jade/01 Introduction/02 Numbering.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "01 Welcome to jade/01 Introduction/02 Numbering.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "01 Welcome to jade/01 Introduction/02 Numbering.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "01 Welcome to jade/01 Introduction/02 Numbering.md"
+              }
             }
           }
         ]
@@ -141,9 +149,9 @@
   "active": "6c4816157a604f65",
   "lastOpenFiles": [
     "01 Welcome to jade/01 Introduction/01 Structure.md",
-    "01 Welcome to jade/01 Introduction/02 Numbering.md",
-    "01 Welcome to jade/metadata.md",
     "metadata.md",
+    "01 Welcome to jade/metadata.md",
+    "01 Welcome to jade/01 Introduction/02 Numbering.md",
     "01 Welcome to jade/01 Introduction/01 Your first page.md",
     "01 Welcome to jade/01 Introduction/01 Numbering.md",
     "cissy.md",
