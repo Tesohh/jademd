@@ -38,6 +38,7 @@ func main() {
 
 	app.Use(logger.New())
 
+	app.Static("/resources", "./view/resources/")
 	app.Post("/publish", handler.Publish)
 	app.Get("/testtempl", handler.TestTempl)
 
