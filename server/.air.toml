@@ -2,31 +2,43 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
+  args_bin = []
   bin = "./tmp/main"
-  cmd = "templ generate && go build -o ./tmp/main ."
-  delay = 0
-  exclude_dir = ["assets", "tmp", "vendor"]
+  cmd = "go build -o ./tmp/main ." # change this as needed
+  delay = 1 # as fast as possible (is faster than having 0)
+  exclude_dir = ["tmp", "vendor", "view"] # can exclude the dir for your templ files instead of regex bellow
   exclude_file = []
-  exclude_regex = [".*_templ.go"]
+  exclude_regex = ["_test.go", "_templ.go"] # don't want to detect templ.go files
   exclude_unchanged = false
   follow_symlink = false
   full_bin = ""
   include_dir = []
-  include_ext = ["go", "tpl", "tmpl", "templ", "html"]
+  include_ext = ["go", "txt"] # don't work with just include_file, so need to include "txt" here (probably a bug in air?)
+  include_file = ["airtempl.txt"] # need to include this as to detect when to update based on templ
   kill_delay = "0s"
   log = "build-errors.log"
+  poll = false
+  poll_interval = 0
+  post_cmd = []
+  pre_cmd = []
+  rerun = false
+  rerun_delay = 500
   send_interrupt = false
-  stop_on_error = true
+  stop_on_error = false
 
 [color]
-  app = ""
   build = "yellow"
   main = "magenta"
   runner = "green"
   watcher = "cyan"
-
+ 
 [log]
+  main_only = true # true: for cleaner output
   time = false
 
 [misc]
   clean_on_exit = false
+
+[screen]
+  clear_on_rebuild = false
+  keep_scroll = true
