@@ -1,6 +1,26 @@
 package view
 
+import (
+	"jademd/obsidian"
+	"jademd/view/components"
+)
+
 templ Tubre() {
 	<h1>Tauferer tor</h1>
-	<img src="resources/maxresdefault.jpg"/>
+	@components.CourseCardStyles()
+	@components.CourseCard(obsidian.Course{Name: "How to tubre a tubrer", CourseMetadata: obsidian.CourseMetadata{
+		Color: "red",
+	}})
+	@components.CourseCard(obsidian.Course{Name: "How to tubre a tubrer", CourseMetadata: obsidian.CourseMetadata{
+		Color: "red",
+	}})
+	@components.CourseCard(obsidian.Course{Name: "How to tubre a tubrer", CourseMetadata: obsidian.CourseMetadata{
+		Color: "red",
+	}})
+	@components.CourseCard(obsidian.Course{Name: "How to tubre a tubrer", CourseMetadata: obsidian.CourseMetadata{
+		Color: "red",
+	}})
+	@components.CourseCard(obsidian.Course{Name: "How to tubre a tubrer", CourseMetadata: obsidian.CourseMetadata{
+		Color: "red",
+	}})
 }

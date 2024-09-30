@@ -15,6 +15,7 @@ type Course struct {
 }
 
 type CourseMetadata struct {
+	Color           string
 	Authors         string
 	ContactEmail    string
 	DifficultyStars int
