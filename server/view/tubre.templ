@@ -1,14 +1,13 @@
 package view
 
 import (
-	"jademd/obsidian"
-	"jademd/view/components"
+"jademd/obsidian"
+"jademd/view/components"
 )
 
-templ Tubre() {
-	<h1>Tauferer tor</h1>
-	@components.CourseCardStyles()
-	@components.CourseCard(obsidian.Course{Name: "How to tubre a tubrer", CourseMetadata: obsidian.CourseMetadata{
-		Color: "red",
-	}})
+templ Tubre(courses []obsidian.Course) {
+<div id="coursepage">
+    <h1>Tauferer tor</h1>
+    @components.CourseCardCarousel(courses)
+</div>
 }

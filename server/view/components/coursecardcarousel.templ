@@ -1,0 +1,11 @@
+package components
+
+import "jademd/obsidian"
+
+templ CourseCardCarousel(courses []obsidian.Course) {
+<div class="coursecard-carousel">
+    for _, course := range courses {
+    @CourseCard(course)
+    }
+</div>
+}

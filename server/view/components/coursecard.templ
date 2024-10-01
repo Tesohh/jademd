@@ -1,39 +1,12 @@
 package components
 
 import (
-	"fmt"
-	"jademd/obsidian"
+"fmt"
+"jademd/obsidian"
 )
 
 templ CourseCard(course obsidian.Course) {
-	<div class={ "coursecard" , fmt.Sprintf("card-color-%s", course.Color) }>
-		<p>{ course.Name }</p>
-	</div>
-}
-
-templ CourseCardStyles() {
-	<style>
-    .coursecard {
-        width: 30vw;
-        height: 45vh;
-        border-radius: 0.5em;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-
-        font-size: 20pt;
-    }
-
-    /* .coursecard>p { */
-    /*     margin-left: 1em auto; */
-    /*     margin-right: 1em auto; */
-    /* } */
-
-    .card-color-red {
-        background: red;
-    }
-</style>
+<div class={ "coursecard" , fmt.Sprintf("card-color-%s", course.Color) }>
+    <p>{ course.Name }</p>
+</div>
 }
