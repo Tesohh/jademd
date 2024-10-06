@@ -2,9 +2,12 @@ package obsidian
 
 import (
 	"bytes"
+	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 	"sort"
+	"strings"
 )
 
 type Vault struct {
@@ -15,29 +18,34 @@ type Vault struct {
 }
 
 type VaultMetadata struct {
-	Name         string
-	Authors      string
-	ContactEmail string
+	Name         string `yaml:"name"`
+	Authors      string `yaml:"authors"`
+	ContactEmail string `yaml:"contact_email"`
 }
 
 func VaultFromLatest(expandCourses bool, expandChapters bool, expandPages bool) (Vault, error) {
-	entries, err := os.ReadDir(os.Getenv("JADEMD_PUBLISH_PATH"))
+	entries, err := os.ReadDir(os.Getenv("JADE_PUBLISH_PATH"))
 	if err != nil {
 		return Vault{}, err
 	}
 
 	sort.Slice(entries, func(i, j int) bool {
-		return entries[i].Name() < entries[j].Name()
+		return entries[i].Name() > entries[j].Name()
+	})
+	entries = slices.DeleteFunc(entries, func(entry os.DirEntry) bool {
+		return !strings.Contains(entry.Name(), "jadevault")
 	})
 
-	path := filepath.Join(os.Getenv("JADEMD_PUBLISH_PATH"), entries[0].Name())
+	path := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), entries[0].Name())
+
 	return VaultFromDir(path, expandCourses, expandChapters, expandPages)
 }
 
 func VaultFromDir(path string, expandCourses bool, expandChapters bool, expandPages bool) (Vault, error) {
 	vault := Vault{} // name comes from metadata
+	fmt.Println("reading vault", path)
 
-	if expandChapters {
+	if expandCourses {
 		entries, err := os.ReadDir(path)
 		if err != nil {
 			return vault, err

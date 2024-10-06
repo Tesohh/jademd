@@ -42,7 +42,7 @@ func main() {
 
 	app.Static("/resources", "./view/resources/")
 	app.Post("/publish", handler.Publish)
-	app.Get("/testtempl", handler.TestTempl)
+	app.Get("/courses", handler.CoursePage)
 
 	app.Listen(":8080")
 }

@@ -3,9 +3,12 @@ package components
 import "jademd/obsidian"
 
 templ CourseCardCarousel(courses []obsidian.Course) {
-<div class="coursecard-carousel">
-    for _, course := range courses {
-    @CourseCard(course)
-    }
-</div>
+	<div class="coursecard-carousel">
+		if len(courses) == 0 {
+			<p>nothing here...</p>
+		}
+		for _, course := range courses {
+			@CourseCard(course)
+		}
+	</div>
 }

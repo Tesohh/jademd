@@ -1,0 +1,16 @@
+package view
+
+import (
+	"jademd/obsidian"
+	"jademd/view/components"
+)
+
+templ CoursePage(vaultName string, enrolledCourses []obsidian.Course, otherCourses []obsidian.Course) {
+	<div id="coursepage">
+		<h1>{ vaultName }</h1>
+		<h2>your courses</h2>
+		@components.CourseCardCarousel(enrolledCourses)
+		<h2>other courses</h2>
+		@components.CourseCardCarousel(otherCourses)
+	</div>
+}

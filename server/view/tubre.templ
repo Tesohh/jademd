@@ -1,13 +1,15 @@
 package view
 
 import (
-"jademd/obsidian"
-"jademd/view/components"
+	"jademd/obsidian"
+	"jademd/view/components"
 )
 
 templ Tubre(courses []obsidian.Course) {
-<div id="coursepage">
-    <h1>Tauferer tor</h1>
-    @components.CourseCardCarousel(courses)
-</div>
+	<div id="coursepage">
+		<h1>Tauferer tor</h1>
+		<h2>your courses</h2>
+		@components.CourseCardCarousel(courses)
+		<h2>your courses</h2>
+	</div>
 }

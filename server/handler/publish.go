@@ -64,7 +64,7 @@ func Publish(c *fiber.Ctx) error {
 	dateStr = strings.ReplaceAll(dateStr, "/", "-")
 	dateStr = strings.ReplaceAll(dateStr, ":", "-")
 
-	vaultPath := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), dateStr)
+	vaultPath := filepath.Join(os.Getenv("JADE_PUBLISH_PATH"), "jadevault"+dateStr)
 	fmt.Printf("received %s files\n", len(folder.File))
 
 	err = os.MkdirAll(vaultPath, os.ModePerm)

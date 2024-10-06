@@ -2,6 +2,7 @@ package obsidian
 
 import (
 	"bytes"
+	"fmt"
 
 	"gopkg.in/yaml.v3"
 )
@@ -11,6 +12,9 @@ func ParseFrontMatter[T any](markdown []byte) (T, []byte, error) {
 
 	frontMatterEnd := -1
 	for i, line := range lines {
+		if i == 0 {
+			continue
+		}
 		if bytes.Compare(line, []byte("---")) == 0 {
 			frontMatterEnd = i
 			break
@@ -23,7 +27,8 @@ func ParseFrontMatter[T any](markdown []byte) (T, []byte, error) {
 	hasFrontMatter := bytes.Compare(lines[0], []byte("---")) == 0 && frontMatterEnd != -1
 
 	if hasFrontMatter {
-		frontmatter := bytes.Join(lines[0:frontMatterEnd], []byte("\n"))
+		frontmatter := bytes.Join(lines[1:frontMatterEnd], []byte("\n"))
+		fmt.Println(string(frontmatter), "END")
 
 		err := yaml.Unmarshal(frontmatter, &metadata)
 		if err != nil {
@@ -32,7 +37,7 @@ func ParseFrontMatter[T any](markdown []byte) (T, []byte, error) {
 	}
 
 	if hasFrontMatter {
-		content = bytes.Join(lines[frontMatterEnd:], []byte("\n"))
+		content = bytes.Join(lines[frontMatterEnd+1:], []byte("\n"))
 	} else {
 		content = markdown
 	}

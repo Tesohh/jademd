@@ -1,12 +1,12 @@
 package components
 
 import (
-"fmt"
-"jademd/obsidian"
+	"fmt"
+	"jademd/obsidian"
 )
 
 templ CourseCard(course obsidian.Course) {
-<div class={ "coursecard" , fmt.Sprintf("card-color-%s", course.Color) }>
-    <p>{ course.Name }</p>
-</div>
+	<a href="example.com" class={ "coursecard" , fmt.Sprintf("card-color-%s", course.Color) }>
+		<p>{ course.Name }</p>
+	</a>
 }

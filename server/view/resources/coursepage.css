@@ -1,36 +1,107 @@
 #coursepage {
+    margin-left: 8vw;
+    margin-top: 5vh;
 }
 
 .coursecard {
-  width: 30vw;
-  height: 35vh;
-  border-radius: 0.5em;
+    width: 8em;
+    height: 10em;
+    border-radius: 0.5em;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-  font-size: 20pt;
+    font-size: 20pt;
+
+    background: #fdf0d5;
+
+    box-shadow: 6px 6px 6px 0px rgba(0, 0, 0, 0.14);
 }
+
 
 .coursecard-carousel {
-  display: flex;
-  width: 80vw;
-  margin: 0 auto;
-  overflow: auto;
+    display: flex;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    overflow: auto;
+    gap: 20px;
 }
 
-.coursecard-carousel > * {
-  flex-shrink: 0;
-  /* flex: 1 0 50%; */
+.coursecard-carousel>* {
+    flex-shrink: 0;
 }
+
+/* TODO: remove a styles */
+a {}
+
+
+/* red, darkred, navy, blue, green, cyan, 
+* yellow, orange, lightpurple, purple, darkpurple
+* babypink, pink, babyblue, lightbrown, brown */
 
 .card-color-red {
-  background: red;
+    background: #c1121f;
+}
+
+.card-color-darkred {
+    background: #780000;
+}
+
+.card-color-navy {
+    background: #003049;
 }
 
 .card-color-blue {
-  background: blue;
+    background: #669bbc;
+}
+
+.card-color-green {
+    background: #264653;
+}
+
+.card-color-cyan {
+    background: #2a9d8f;
+}
+
+.card-color-yellow {
+    background: #f4a261;
+}
+
+.card-color-orange {
+    background: #e76f51;
+}
+
+.card-color-lightpurple {
+    background: #cdb4db;
+}
+
+.card-color-purple {
+    background: #5e548e;
+}
+
+.card-color-darkpurple {
+    background: #231942;
+}
+
+.card-color-babypink {
+    background: #ffc8dd;
+}
+
+.card-color-pink {
+    background: #ffafcc;
+}
+
+.card-color-babyblue {
+    background: #a2d2ff;
+}
+
+.card-color-lightbrown {
+    background: #e29578;
+}
+
+.card-color-brown {
+    background: #bc4749;
 }
